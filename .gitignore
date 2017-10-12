@@ -32,6 +32,7 @@
 
 # ignore everything in the root except the "wp-content" directory.
 /*
+!bridge2cart/
 !wp-content/
 
 # ignore all files starting with .
