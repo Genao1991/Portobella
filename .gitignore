@@ -1,98 +1,115 @@
-# -----------------------------------------------------------------
-# .gitignore for WordPress
-# Bare Minimum Git
-# http://ironco.de/bare-minimum-git/
-# ver 20150227
-#
-# This file is tailored for a WordPress project 
-# using the default directory structure
-#
-# This file specifies intentionally untracked files to ignore
-# http://git-scm.com/docs/gitignore
-#
-# NOTES:
-# The purpose of gitignore files is to ensure that certain files not
-# tracked by Git remain untracked.
-#
-# To ignore uncommitted changes in a file that is already tracked,
-# use `git update-index --assume-unchanged`.
-#
-# To stop tracking a file that is currently tracked,
-# use `git rm --cached`
-#
-# Change Log:
-# 20150227 Ignore hello.php plugin. props @damienfa
-# 20150227 Change theme ignore to wildcard twenty*. props @Z33
-# 20140606 Add .editorconfig as a tracked file
-# 20140404 Ignore database, compiled, and packaged files
-# 20140404 Header Information Updated
-# 20140402 Initially Published
-#
-# -----------------------------------------------------------------
-
-# ignore everything in the root except the "wp-content" directory.
-/*
-!bridge2cart/
-!wp-content/
-
-# ignore all files starting with .
-.*
-
-# track this file .gitignore (i.e. do NOT ignore it)
-!.gitignore
-
-# track .editorconfig file (i.e. do NOT ignore it)
-!.editorconfig
-
-# track readme.md in the root (i.e. do NOT ignore it)
-!readme.md
-
-# ignore all files that start with ~
-~*
-
-# ignore OS generated files
-ehthumbs.db
-Thumbs.db
-
-# ignore Editor files
-*.sublime-project
-*.sublime-workspace
-*.komodoproject
-
-# ignore log files and databases
-*.log
+# WP-CLI database dumps should not be tracked in git
 *.sql
-*.sqlite
 
-# ignore compiled files
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
+# Ignore OSX file system junk
+.DS_Store
 
-# ignore packaged files
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
+# Ignore Visual Studio configs
+.vscode
 
-# ignore everything in the "wp-content" directory, except:
-# "mu-plugins" directory
-# "plugins" directory
-# "themes" directory
+# Ignore PhpStorm configs
+.idea
 
+# Don't include whole svn repositories
+.svn
 
-# ignore these plugins
-wp-content/plugins/hello.php
+# Custom environment variables may include passwords and other
+# secrets and should not be tracked in git
+.env
+.env.*
+!.env.example
 
-# ignore specific themes
-wp-content/themes/twenty*/
+##
+# Ignore Sitespeed results
+##
+tests/sitespeed-result
 
-# ignore node/grunt dependency directories
-node_modules/
+##
+# Images created from tests
+##
+tests/rspec/images/*
+!tests/rspec/images/.gitkeep
+
+##
+# WP core
+# - This is installed by Composer
+##
+web/wp
+web/.htaccess
+
+##
+# WP Plugins
+# - Don't track any plugins in git because we use composer
+# - If you create custom plugins, force add them to git so they're tracked in git
+##
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+
+##
+# WP MU-Plugins
+##
+# Ignore folders in mu-plugins
+web/app/mu-plugins/*
+# Don't ignore .php files in mu-plugins
+!web/app/mu-plugins/*.php
+!web/app/mu-plugins/.gitkeep
+
+##
+# WP Dropins
+# - Use devgeniem/better-wp-db-error for db-error.php page
+# - Use devgeniem/better-wp-install-dropin for install.php
+# - Use wpackagist-plugin/redis-cache for object-cache.php
+##
+web/app/db-error.php
+web/app/install.php
+web/app/object-cache.php
+##
+# WP Themes
+# - Don't track themes which have packages
+# - Prefer using child themes and use composer for parent theme
+# - If you create custom themes, they are automatically tracked in git
+##
+web/app/themes/twenty*
+!web/app/themes/.gitkeep
+
+##
+# Don't track languages
+##
+web/app/languages/*
+!web/app/languages/.gitkeep
+
+# WordPress content directories filled with user data
+# not to be tracked in git
+web/app/upgrade
+web/app/uploads/*
+!web/app/uploads/.gitkeep
+
+# Libraries installed by Composer, Bower etc
+vendor/*
+!vendor/.gitkeep
+
+# Node Package Manager
+node_modules
+
+# Development stuff from devgeniem/wordpress-server
+.docker
+.mysql_history
+.wp-cli
+
+# Don't include unison data sync tmp files
+*.unison.tmp
+
+# If someone used sed-replace please ignore backup files
+*.bak
+
+# Ignore all nginx files generated from templates
+nginx/environments/*/server/.htpasswd
+nginx/environments/*/server/basic-auth.conf
+nginx/environments/testing/http/https-server.conf
+
+## If switching branches locally from gh-pages branch
+_site
+.sass-cache
+
+## Ignore Docker Sync logs and files
+.docker-sync
