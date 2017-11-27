@@ -35,15 +35,15 @@ tests/rspec/images/*
 # WP core
 # - This is installed by Composer
 ##
-web/wp
-web/.htaccess
+#web/wp
+#web/.htaccess
 
 ##
 # WP Plugins
 # - Don't track any plugins in git because we use composer
 # - If you create custom plugins, force add them to git so they're tracked in git
 ##
-web/app/plugins/*
+#web/app/plugins/*
 !web/app/plugins/.gitkeep
 
 ##
@@ -52,8 +52,8 @@ web/app/plugins/*
 # Ignore folders in mu-plugins
 web/app/mu-plugins/*
 # Don't ignore .php files in mu-plugins
-!web/app/mu-plugins/*.php
-!web/app/mu-plugins/.gitkeep
+#!web/app/mu-plugins/*.php
+#!web/app/mu-plugins/.gitkeep
 
 ##
 # WP Dropins
@@ -81,8 +81,8 @@ web/app/languages/*
 
 # WordPress content directories filled with user data
 # not to be tracked in git
-web/app/upgrade
-web/app/uploads/*
+!web/app/upgrade
+!web/app/uploads/*
 !web/app/uploads/.gitkeep
 
 # Libraries installed by Composer, Bower etc
@@ -139,7 +139,7 @@ _site
 # "mu-plugins" directory
 # "plugins" directory
 # "themes" directory
-wp-content/*
+!wp-content/*
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
